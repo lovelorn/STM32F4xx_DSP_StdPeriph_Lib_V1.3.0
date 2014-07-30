@@ -85,8 +85,10 @@
 
 /* Old STM32F40XX definition, maintained for legacy purpose */
 #ifdef STM32F40XX
+#ifndef STM32F40_41xxx
   #define STM32F40_41xxx
-#endif /* STM32F40XX */
+#endif  /*STM32F40_41xxx */
+#endif /* STM32F40XX */  
 
 /* Old STM32F427X definition, maintained for legacy purpose */
 #ifdef STM32F427X
