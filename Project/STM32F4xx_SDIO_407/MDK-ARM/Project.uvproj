@@ -72,6 +72,8 @@
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
+            <nStopB1X>0</nStopB1X>
+            <nStopB2X>0</nStopB2X>
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
@@ -128,6 +130,7 @@
             <RestoreFunctions>1</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
+            <RestoreSysVw>1</RestoreSysVw>
           </Simulator>
           <Target>
             <UseTarget>1</UseTarget>
@@ -139,6 +142,8 @@
             <RestoreFunctions>1</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <RestoreTracepoints>0</RestoreTracepoints>
+            <RestoreSysVw>1</RestoreSysVw>
+            <UsePdscDebugDescription>1</UsePdscDebugDescription>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
           <TargetSelection>13</TargetSelection>
@@ -353,6 +358,8 @@
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
+            <uC99>0</uC99>
+            <useXO>0</useXO>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F429_439xx,USE_STM324x9I_EVAL,</Define>
@@ -369,6 +376,7 @@
             <SwStkChk>0</SwStkChk>
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
+            <useXO>0</useXO>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
@@ -385,6 +393,7 @@
             <useFile>0</useFile>
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
+            <pXoBase></pXoBase>
             <ScatterFile></ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
@@ -449,6 +458,7 @@
                     <SwStkChk>2</SwStkChk>
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -490,6 +500,7 @@
                     <SwStkChk>2</SwStkChk>
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -531,6 +542,7 @@
                     <SwStkChk>2</SwStkChk>
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -627,6 +639,8 @@
                     <wLevel>0</wLevel>
                     <uThumb>2</uThumb>
                     <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -783,14 +797,24 @@
               <FilePath>..\UserApp\stm32f4xx_it.c</FilePath>
             </File>
             <File>
-              <FileName>stm324xg_eval.c</FileName>
+              <FileName>usb_bsp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval.c</FilePath>
+              <FilePath>..\UserApp\usb_bsp.c</FilePath>
             </File>
             <File>
-              <FileName>stm324xg_eval_sdio_sd.c</FileName>
+              <FileName>usbd_cdc_vcp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval_sdio_sd.c</FilePath>
+              <FilePath>..\UserApp\usbd_cdc_vcp.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_desc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\UserApp\usbd_desc.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_usr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\UserApp\usbd_usr.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -806,11 +830,6 @@
               <FileName>RTC.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Libraries\HAL_CGC\RTC.c</FilePath>
-            </File>
-            <File>
-              <FileName>LCD.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\Libraries\HAL_CGC\LCD.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -904,6 +923,76 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>STM32F40_41_G_EVAL</GroupName>
+          <Files>
+            <File>
+              <FileName>stm324xg_eval.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm324xg_eval_sdio_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval_sdio_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm324xg_eval_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval_lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_log.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Utilities\STM32_EVAL\Common\lcd_log.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>USB Driver</GroupName>
+          <Files>
+            <File>
+              <FileName>usb_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_OTG_Driver\src\usb_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_dcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_OTG_Driver\src\usb_dcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_dcd_int.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_OTG_Driver\src\usb_dcd_int.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>USB Device</GroupName>
+          <Files>
+            <File>
+              <FileName>usbd_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_Device_Library\Core\src\usbd_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_ioreq.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_Device_Library\Core\src\usbd_ioreq.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_req.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_Device_Library\Core\src\usbd_req.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_cdc_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_Device_Library\Class\cdc\src\usbd_cdc_core.c</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
     <Target>
@@ -972,6 +1061,8 @@
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
+            <nStopB1X>0</nStopB1X>
+            <nStopB2X>0</nStopB2X>
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
@@ -1028,6 +1119,7 @@
             <RestoreFunctions>1</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
+            <RestoreSysVw>1</RestoreSysVw>
           </Simulator>
           <Target>
             <UseTarget>1</UseTarget>
@@ -1039,6 +1131,8 @@
             <RestoreFunctions>1</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <RestoreTracepoints>0</RestoreTracepoints>
+            <RestoreSysVw>1</RestoreSysVw>
+            <UsePdscDebugDescription>1</UsePdscDebugDescription>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
           <TargetSelection>13</TargetSelection>
@@ -1253,6 +1347,8 @@
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
+            <uC99>0</uC99>
+            <useXO>0</useXO>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F427_437xx,USE_STM324x7I_EVAL,</Define>
@@ -1269,6 +1365,7 @@
             <SwStkChk>0</SwStkChk>
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
+            <useXO>0</useXO>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
@@ -1285,6 +1382,7 @@
             <useFile>0</useFile>
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
+            <pXoBase></pXoBase>
             <ScatterFile></ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
@@ -1349,6 +1447,7 @@
                     <SwStkChk>2</SwStkChk>
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1395,6 +1494,7 @@
                     <SwStkChk>2</SwStkChk>
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1436,6 +1536,7 @@
                     <SwStkChk>2</SwStkChk>
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1527,6 +1628,8 @@
                     <wLevel>0</wLevel>
                     <uThumb>2</uThumb>
                     <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1683,14 +1786,24 @@
               <FilePath>..\UserApp\stm32f4xx_it.c</FilePath>
             </File>
             <File>
-              <FileName>stm324xg_eval.c</FileName>
+              <FileName>usb_bsp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval.c</FilePath>
+              <FilePath>..\UserApp\usb_bsp.c</FilePath>
             </File>
             <File>
-              <FileName>stm324xg_eval_sdio_sd.c</FileName>
+              <FileName>usbd_cdc_vcp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval_sdio_sd.c</FilePath>
+              <FilePath>..\UserApp\usbd_cdc_vcp.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_desc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\UserApp\usbd_desc.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_usr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\UserApp\usbd_usr.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1706,11 +1819,6 @@
               <FileName>RTC.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Libraries\HAL_CGC\RTC.c</FilePath>
-            </File>
-            <File>
-              <FileName>LCD.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\Libraries\HAL_CGC\LCD.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1801,6 +1909,76 @@
               <FileName>os_dbg_r.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Utilities\Third_Party\ucos_ii\port\os_dbg_r.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>STM32F40_41_G_EVAL</GroupName>
+          <Files>
+            <File>
+              <FileName>stm324xg_eval.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm324xg_eval_sdio_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval_sdio_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm324xg_eval_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval_lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_log.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Utilities\STM32_EVAL\Common\lcd_log.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>USB Driver</GroupName>
+          <Files>
+            <File>
+              <FileName>usb_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_OTG_Driver\src\usb_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_dcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_OTG_Driver\src\usb_dcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_dcd_int.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_OTG_Driver\src\usb_dcd_int.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>USB Device</GroupName>
+          <Files>
+            <File>
+              <FileName>usbd_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_Device_Library\Core\src\usbd_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_ioreq.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_Device_Library\Core\src\usbd_ioreq.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_req.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_Device_Library\Core\src\usbd_req.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_cdc_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_Device_Library\Class\cdc\src\usbd_cdc_core.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1872,6 +2050,8 @@
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
+            <nStopB1X>0</nStopB1X>
+            <nStopB2X>0</nStopB2X>
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
@@ -1928,6 +2108,7 @@
             <RestoreFunctions>1</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
+            <RestoreSysVw>1</RestoreSysVw>
           </Simulator>
           <Target>
             <UseTarget>1</UseTarget>
@@ -1939,9 +2120,11 @@
             <RestoreFunctions>1</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <RestoreTracepoints>0</RestoreTracepoints>
+            <RestoreSysVw>1</RestoreSysVw>
+            <UsePdscDebugDescription>1</UsePdscDebugDescription>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>12</TargetSelection>
+          <TargetSelection>11</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -2153,11 +2336,13 @@
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
+            <uC99>0</uC99>
+            <useXO>0</useXO>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
-              <Define>USE_STDPERIPH_DRIVER,USE_STM324xG_EVAL,</Define>
+              <Define>USE_STDPERIPH_DRIVER,USE_STM324xG_EVAL,USE_USB_OTG_FS</Define>
               <Undefine></Undefine>
-              <IncludePath>..\;..\..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\..\Utilities\STM32_EVAL\Common;..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL;..\..\..\Libraries\HAL_CGC;..\..\..\Utilities\Third_Party\fat_fs\inc;..\..\..\Utilities\Third_Party\ucos_ii\port;..\..\..\Utilities\Third_Party\ucos_ii\source;..\UserApp</IncludePath>
+              <IncludePath>..\;..\..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\..\Utilities\STM32_EVAL\Common;..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL;..\..\..\Libraries\HAL_CGC;..\..\..\Utilities\Third_Party\fat_fs\inc;..\..\..\Utilities\Third_Party\ucos_ii\port;..\..\..\Utilities\Third_Party\ucos_ii\source;..\UserApp;..\..\..\Libraries\STM32_USB_Device_Library\Core\inc;..\..\..\Libraries\STM32_USB_Device_Library\Class\cdc\inc;..\..\..\Libraries\STM32_USB_OTG_Driver\inc;..\..\..\Utilities\STM32_EVAL</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -2169,6 +2354,7 @@
             <SwStkChk>0</SwStkChk>
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
+            <useXO>0</useXO>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
@@ -2185,6 +2371,7 @@
             <useFile>0</useFile>
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
+            <pXoBase></pXoBase>
             <ScatterFile></ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
@@ -2249,6 +2436,7 @@
                     <SwStkChk>2</SwStkChk>
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -2290,6 +2478,7 @@
                     <SwStkChk>2</SwStkChk>
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -2336,6 +2525,7 @@
                     <SwStkChk>2</SwStkChk>
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -2557,6 +2747,8 @@
                     <wLevel>0</wLevel>
                     <uThumb>2</uThumb>
                     <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -2583,14 +2775,24 @@
               <FilePath>..\UserApp\stm32f4xx_it.c</FilePath>
             </File>
             <File>
-              <FileName>stm324xg_eval.c</FileName>
+              <FileName>usb_bsp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval.c</FilePath>
+              <FilePath>..\UserApp\usb_bsp.c</FilePath>
             </File>
             <File>
-              <FileName>stm324xg_eval_sdio_sd.c</FileName>
+              <FileName>usbd_cdc_vcp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval_sdio_sd.c</FilePath>
+              <FilePath>..\UserApp\usbd_cdc_vcp.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_desc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\UserApp\usbd_desc.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_usr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\UserApp\usbd_usr.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2606,11 +2808,6 @@
               <FileName>RTC.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Libraries\HAL_CGC\RTC.c</FilePath>
-            </File>
-            <File>
-              <FileName>LCD.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\Libraries\HAL_CGC\LCD.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2701,6 +2898,76 @@
               <FileName>os_dbg_r.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Utilities\Third_Party\ucos_ii\port\os_dbg_r.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>STM32F40_41_G_EVAL</GroupName>
+          <Files>
+            <File>
+              <FileName>stm324xg_eval.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm324xg_eval_sdio_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval_sdio_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm324xg_eval_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval_lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_log.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Utilities\STM32_EVAL\Common\lcd_log.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>USB Driver</GroupName>
+          <Files>
+            <File>
+              <FileName>usb_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_OTG_Driver\src\usb_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_dcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_OTG_Driver\src\usb_dcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_dcd_int.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_OTG_Driver\src\usb_dcd_int.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>USB Device</GroupName>
+          <Files>
+            <File>
+              <FileName>usbd_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_Device_Library\Core\src\usbd_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_ioreq.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_Device_Library\Core\src\usbd_ioreq.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_req.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_Device_Library\Core\src\usbd_req.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_cdc_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_Device_Library\Class\cdc\src\usbd_cdc_core.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2772,6 +3039,8 @@
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
+            <nStopB1X>0</nStopB1X>
+            <nStopB2X>0</nStopB2X>
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
@@ -2828,6 +3097,7 @@
             <RestoreFunctions>1</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
+            <RestoreSysVw>1</RestoreSysVw>
           </Simulator>
           <Target>
             <UseTarget>1</UseTarget>
@@ -2839,6 +3109,8 @@
             <RestoreFunctions>1</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <RestoreTracepoints>0</RestoreTracepoints>
+            <RestoreSysVw>1</RestoreSysVw>
+            <UsePdscDebugDescription>1</UsePdscDebugDescription>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
           <TargetSelection>12</TargetSelection>
@@ -3053,6 +3325,8 @@
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
+            <uC99>0</uC99>
+            <useXO>0</useXO>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
               <Define>USE_STDPERIPH_DRIVER,USE_STM324xG_EVAL</Define>
@@ -3069,6 +3343,7 @@
             <SwStkChk>0</SwStkChk>
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
+            <useXO>0</useXO>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
@@ -3085,6 +3360,7 @@
             <useFile>0</useFile>
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
+            <pXoBase></pXoBase>
             <ScatterFile></ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
@@ -3154,6 +3430,7 @@
                     <SwStkChk>2</SwStkChk>
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -3195,6 +3472,7 @@
                     <SwStkChk>2</SwStkChk>
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -3236,6 +3514,7 @@
                     <SwStkChk>2</SwStkChk>
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -3327,6 +3606,8 @@
                     <wLevel>0</wLevel>
                     <uThumb>2</uThumb>
                     <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -3498,6 +3779,8 @@
                     <wLevel>0</wLevel>
                     <uThumb>2</uThumb>
                     <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -3524,14 +3807,24 @@
               <FilePath>..\UserApp\stm32f4xx_it.c</FilePath>
             </File>
             <File>
-              <FileName>stm324xg_eval.c</FileName>
+              <FileName>usb_bsp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval.c</FilePath>
+              <FilePath>..\UserApp\usb_bsp.c</FilePath>
             </File>
             <File>
-              <FileName>stm324xg_eval_sdio_sd.c</FileName>
+              <FileName>usbd_cdc_vcp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval_sdio_sd.c</FilePath>
+              <FilePath>..\UserApp\usbd_cdc_vcp.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_desc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\UserApp\usbd_desc.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_usr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\UserApp\usbd_usr.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3547,11 +3840,6 @@
               <FileName>RTC.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Libraries\HAL_CGC\RTC.c</FilePath>
-            </File>
-            <File>
-              <FileName>LCD.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\Libraries\HAL_CGC\LCD.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3642,6 +3930,76 @@
               <FileName>os_dbg_r.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Utilities\Third_Party\ucos_ii\port\os_dbg_r.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>STM32F40_41_G_EVAL</GroupName>
+          <Files>
+            <File>
+              <FileName>stm324xg_eval.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm324xg_eval_sdio_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval_sdio_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm324xg_eval_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval_lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_log.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Utilities\STM32_EVAL\Common\lcd_log.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>USB Driver</GroupName>
+          <Files>
+            <File>
+              <FileName>usb_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_OTG_Driver\src\usb_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_dcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_OTG_Driver\src\usb_dcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_dcd_int.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_OTG_Driver\src\usb_dcd_int.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>USB Device</GroupName>
+          <Files>
+            <File>
+              <FileName>usbd_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_Device_Library\Core\src\usbd_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_ioreq.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_Device_Library\Core\src\usbd_ioreq.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_req.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_Device_Library\Core\src\usbd_req.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_cdc_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libraries\STM32_USB_Device_Library\Class\cdc\src\usbd_cdc_core.c</FilePath>
             </File>
           </Files>
         </Group>

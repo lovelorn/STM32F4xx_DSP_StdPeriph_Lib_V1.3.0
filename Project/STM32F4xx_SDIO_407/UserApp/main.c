@@ -36,7 +36,12 @@
 #include "rtc.h"
 #include "ucos_ii.h"
 #include "stdlib.h"
-#include "lcd.h"
+//#include "lcd.h"
+
+#include "usbd_cdc_core.h"
+#include "usbd_usr.h"
+#include "usb_conf.h"
+#include "usbd_desc.h"
 /** @addtogroup STM32F4xx_StdPeriph_Examples
   * @{
   */
@@ -56,6 +61,14 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 #define LCD_TASK_PROD                   10
 
 /* Private macro -------------------------------------------------------------*/
+  
+#ifdef USB_OTG_HS_INTERNAL_DMA_ENABLED
+  #if defined ( __ICCARM__ ) /*!< IAR Compiler */
+    #pragma data_alignment=4   
+  #endif
+#endif /* USB_OTG_HS_INTERNAL_DMA_ENABLED */
+   
+__ALIGN_BEGIN USB_OTG_CORE_HANDLE    USB_OTG_dev __ALIGN_END ;
 
 /* Private variables ---------------------------------------------------------*/
 
@@ -180,7 +193,7 @@ static void App_Task0(void *p_arg)
 	}
 	
 
-	os_err = OSTaskCreateExt((void (*)(void *)) LCD_Display, //创建一个初始任务
+	/*os_err = OSTaskCreateExt((void (*)(void *)) LCD_Display, //创建一个初始任务
                              (void          * ) 0,
                              (OS_STK        * )&LCD_TestTaskStack[APP_TASK0_STK_SIZE - 1],
                              (uint8_t         ) LCD_TASK_PROD,
@@ -193,8 +206,18 @@ static void App_Task0(void *p_arg)
 	{
 		OSTaskNameSet(LCD_TASK_PROD, (uint8_t *)"LCD Test Task", &os_err); //给新任务命名
 	}
+	*/
 	
-
+/* Init ths USB device*/	
+  USBD_Init(&USB_OTG_dev,
+#ifdef USE_USB_OTG_HS 
+            USB_OTG_HS_CORE_ID,
+#else            
+            USB_OTG_FS_CORE_ID,
+#endif  
+            &USR_desc, 
+            &USBD_CDC_cb, 
+            &USR_cb);
 
 	while(1)
 	{
@@ -347,7 +370,7 @@ static void  Fatfs_TestTask(void *p_arg)
 
 }
 
-
+/*
 static void LCD_Display(void *p_arg)
 {
 	static int8_t LCD_Buffer[100];
@@ -373,7 +396,7 @@ static void LCD_Display(void *p_arg)
 	}
 
 }
-
+*/
 
 
 void RTC_TimeShow(void)
