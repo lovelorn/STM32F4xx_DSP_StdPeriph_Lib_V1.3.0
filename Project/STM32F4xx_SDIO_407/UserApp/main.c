@@ -223,6 +223,8 @@ static void App_Task0(void *p_arg)
 	{
 		OSTimeDly(1000);
 		//RTC_TimeShow();
+		STM_EVAL_LEDToggle(LED3);
+
 	}
 	
 

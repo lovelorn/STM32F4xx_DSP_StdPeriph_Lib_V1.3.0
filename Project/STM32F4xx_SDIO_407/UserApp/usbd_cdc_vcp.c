@@ -32,7 +32,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_cdc_vcp.h"
 #include "usb_conf.h"
-
+#include "ucos_ii.h"
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -56,6 +56,8 @@ extern uint8_t  APP_Rx_Buffer []; /* Write CDC received data in this buffer.
 extern uint32_t APP_Rx_ptr_in;    /* Increment this pointer or roll it back to
                                      start address when writing received data
                                      in the buffer APP_Rx_Buffer. */
+extern uint32_t APP_Rx_ptr_out;
+extern uint32_t APP_Rx_length;	
 
 /* Private function prototypes -----------------------------------------------*/
 static uint16_t VCP_Init     (void);
@@ -84,6 +86,8 @@ CDC_IF_Prop_TypeDef VCP_fops =
   */
 static uint16_t VCP_Init(void)
 {
+	  return USBD_OK;//skip the usart3 config,
+
   NVIC_InitTypeDef NVIC_InitStructure;
   
   /* EVAL_COM1 default configuration */
@@ -207,22 +211,42 @@ static uint16_t VCP_Ctrl (uint32_t Cmd, uint8_t* Buf, uint32_t Len)
   */
 static uint16_t VCP_DataTx (uint8_t* Buf, uint32_t Len)
 {
-  if (linecoding.datatype == 7)
-  {
-    APP_Rx_Buffer[APP_Rx_ptr_in] = USART_ReceiveData(EVAL_COM1) & 0x7F;
-  }
-  else if (linecoding.datatype == 8)
-  {
-    APP_Rx_Buffer[APP_Rx_ptr_in] = USART_ReceiveData(EVAL_COM1);
-  }
-  
-  APP_Rx_ptr_in++;
-  
-  /* To avoid buffer overflow */
-  if(APP_Rx_ptr_in == APP_RX_DATA_SIZE)
-  {
-    APP_Rx_ptr_in = 0;
-  }  
+//  if (linecoding.datatype == 7)
+//  {
+//    APP_Rx_Buffer[APP_Rx_ptr_in] = USART_ReceiveData(EVAL_COM1) & 0x7F;
+//  }
+//  else if (linecoding.datatype == 8)
+//  {
+//    APP_Rx_Buffer[APP_Rx_ptr_in] = USART_ReceiveData(EVAL_COM1);
+//  }
+//  
+//  APP_Rx_ptr_in++;
+//  
+//  /* To avoid buffer overflow */
+//  if(APP_Rx_ptr_in == APP_RX_DATA_SIZE)
+//  {
+//    APP_Rx_ptr_in = 0;
+//  }  
+	
+	uint16_t i;
+#if OS_CRITICAL_METHOD == 3 /* Allocate storage for CPU status register */
+	OS_CPU_SR  cpu_sr = 0;
+#endif	
+	while(Len > (APP_RX_DATA_SIZE - APP_Rx_length));
+	
+	OS_ENTER_CRITICAL();
+	for(i = 0; i < Len;i++)
+	{
+		APP_Rx_Buffer[APP_Rx_ptr_in] = Buf[i];
+		APP_Rx_ptr_in++;
+		if(APP_Rx_ptr_in == APP_RX_DATA_SIZE)
+		{
+			APP_Rx_ptr_in = 0;
+		}
+	}
+	OS_EXIT_CRITICAL();
+	
+	
   
   return USBD_OK;
 }
@@ -244,13 +268,14 @@ static uint16_t VCP_DataTx (uint8_t* Buf, uint32_t Len)
   */
 static uint16_t VCP_DataRx (uint8_t* Buf, uint32_t Len)
 {
-  uint32_t i;
-  
-  for (i = 0; i < Len; i++)
-  {
-    USART_SendData(EVAL_COM1, *(Buf + i) );
-    while(USART_GetFlagStatus(EVAL_COM1, USART_FLAG_TXE) == RESET); 
-  } 
+//  uint32_t i;
+//  
+//  for (i = 0; i < Len; i++)
+//  {
+//    USART_SendData(EVAL_COM1, *(Buf + i) );
+//    while(USART_GetFlagStatus(EVAL_COM1, USART_FLAG_TXE) == RESET); 
+//  } 
+	VCP_DataTx(Buf,Len);//将数据直接回送，测试专用
  
   return USBD_OK;
 }
@@ -264,6 +289,8 @@ static uint16_t VCP_DataRx (uint8_t* Buf, uint32_t Len)
   */
 static uint16_t VCP_COMConfig(uint8_t Conf)
 {
+	  return USBD_OK;//skip the usart3 config
+
   if (Conf == DEFAULT_CONFIG)  
   {
     /* EVAL_COM1 default configuration */
